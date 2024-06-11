@@ -662,7 +662,7 @@ const bodyParserJSON = bodyParser.json()
         let idC = request.params.idC
         let idP = request.params.idP
         let idPE = request.params.idPE
-        let result = await controllerPedidos.setInserirNovoPedido(idPE, idP, idC)
+        let result = await controllerCarrinho.setInserirProdutoCarrinho(idPE, idP, idC)
         
         response.status(result.status_code)
         response.json(result)
