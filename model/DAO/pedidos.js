@@ -11,8 +11,8 @@ const prisma = new PrismaClient()
 const selectAllPedidos = async function(){
     try {
         let sql = `select tbl_pedidos.*, tbl_produto.id_produto, tbl_produto.nome from tbl_pedidos 
-        inner join tbl_pedido_produto on tbl_pedidos.id_pedido = tbl_pedido_produto.id_pedido
-        inner join tbl_produto on tbl_produto.id_produto = tbl_pedido_produto.id_produto;`
+        left join tbl_pedido_produto on tbl_pedidos.id_pedido = tbl_pedido_produto.id_pedido
+        left join tbl_produto on tbl_produto.id_produto = tbl_pedido_produto.id_produto;`
     
        
         let rs = await prisma.$queryRawUnsafe(sql)
