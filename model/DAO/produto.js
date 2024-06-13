@@ -36,6 +36,22 @@ const selectProdutobyID = async function(id){
     }   
 }
 
+const selectProdutobyNome = async function(nome){
+    try {
+        // Realiza a busca do genero pelo ID
+    let sql = `select * from tbl_produto where nome LIKE "%${nome}%"`;
+
+        // Executa no banco de dados o script sql
+        let rsProduto = await prisma.$queryRawUnsafe(sql);
+
+            return rsProduto;
+    
+    } catch (error) {
+        console.log(error);
+        return false;    
+    }   
+}
+
 const insertProduto = async function(dadosProduto) {
     try {
         let sql;
@@ -119,6 +135,7 @@ const updateProduto = async(id, dadosProduto) => {
 
 module.exports ={
     selectAllProdutos,
+    selectProdutobyNome,
     selectProdutobyID,
     insertProduto,
     lastIDProduto,
