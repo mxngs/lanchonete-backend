@@ -68,10 +68,12 @@ const updateCarrinho = async function(id, id_produto, bool) {
 }
 
 
-const deleteCarrinho = async(id) =>{
+const deleteProdutoCarrinho = async(idP, idC) =>{
     try{
 
-        let sql = `delete from tbl_pedido where id_produto = ${id}`
+        let sql = `delete from tbl_pedido_produto 
+        left join tbl_pedido on tbl_pedido_produto.id_pedido = tbl_pedido.id_pedido
+         where tbl_pedido_produto.id_produto = ${idP} AND tbl_pedido.id_cliente = ${idC}`
        
         let rsdelete = await prisma.$executeRawUnsafe(sql)
        return rsdelete
@@ -85,5 +87,5 @@ module.exports ={
     selectCarrinhoByCliente,
     insertCarrinho,
     updateCarrinho,
-    deleteCarrinho
+    deleteProdutoCarrinho
 }

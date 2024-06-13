@@ -64,25 +64,21 @@ const setInserirProdutoCarrinho = async function (id_pe, id_p, id_c){
 
 }
 
-const setExcluirPedido = async(id) => {
+const setExcluirProdutoCarrinho = async(id, idC) => {
     try {
         let idP = id
-        if(idP == '' || idP == undefined || isNaN(idP)){
+        let idc = idC
+        if(idP == '' || idP == undefined || isNaN(idP) ||
+        idc == '' || idc == undefined || isNaN(idc)){
             return message.ERROR_INVALID_ID
         }else{
-            let existe = await pedidoDAO.selectPedidobyID(idP)
-            if
-            (existe){
-                let deletado = await pedidoDAO.deletePedido(idP)
+                let deletado = await psCarrinho.deleteProdutoCarrinho(idP, idc)
                 return message.SUCCESS_DELETED_ITEM
                 // if(deletado){
                 //     return message.SUCCESS_DELETED_ITEM
                 // }else{
                 //     return message.ERROR_INTERNAL_SERVER_DB
                 // }
-            }else{
-                return message.ERROR_NOT_FOUND
-            }
         }
     } catch (error) {
      return message.ERROR_INTERNAL_SERVER //500
@@ -157,6 +153,6 @@ const setAtualizarPedido = async function(idPedido, id_c, id_p, dadosPedido, con
 module.exports = {
    getCarrinho,
    setInserirProdutoCarrinho,
-    setExcluirPedido,
+    setExcluirProdutoCarrinho,
     setAtualizarPedido
 };

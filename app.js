@@ -682,10 +682,10 @@ const bodyParserJSON = bodyParser.json()
 
 
     app.delete('/v1/lanchonete/carrinho/:idProduto/:idCliente', cors(), async function(request, response, next){
-        let idI = request.params.id
+        let idP = request.params.idProduto
+        let idc = request.params.idCliente
 
-        let dados = await controllerPedidos.setExcluirPedido(idI)
-
+        let dados = await controllerCarrinho.setExcluirProdutoCarrinho(idP, idc)
         response.status(dados.status_code)
         response.json(dados)
     })
