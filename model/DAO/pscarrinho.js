@@ -10,7 +10,7 @@ const prisma = new PrismaClient()
 const selectCarrinhoByCliente = async function(id){
     try {
         // Realiza a busca do genero pelo ID
-        let sql = `select tbl_produto.nome, tbl_produto.descricao, tbl_produto.valor, tbl_pedidos.desconto, tbl_pedidos.tempo_entrega, tbl_pedidos.taxa_entrega from tbl_produto 
+        let sql = `select tbl_produto.id_produto, tbl_produto.nome, tbl_produto.descricao, tbl_produto.valor, tbl_pedidos.id_pedido, tbl_pedidos.desconto, tbl_pedidos.tempo_entrega, tbl_pedidos.taxa_entrega, tbl_pedido_produto.id_pedido_produto, tbl_pedido_produto.status_view from tbl_produto 
         join tbl_pedido_produto on tbl_pedido_produto.id_produto = tbl_produto.id_produto 
         join tbl_pedidos on tbl_pedido_produto.id_pedido = tbl_pedidos.id_pedido
         where tbl_pedidos.id_cliente = ${id};`;

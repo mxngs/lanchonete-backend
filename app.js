@@ -73,6 +73,18 @@ const bodyParserJSON = bodyParser.json()
         response.json(dadosProduto)
     })
 
+     // // EndPoint: ele retorna os dados pelo nome
+     app.get('/v1/lanchonete/produto', cors(), async function(request, response, next){
+
+        let nomeProduto = request.query.nome
+        // Encaminha o ID para a controller buscar o Filme
+        let dadosProduto = await controllerProduto.getBuscarProdutoNome(nomeProduto)
+
+        
+        response.status(dadosProduto.status_code)
+        response.json(dadosProduto)
+    })
+
     // //EndPoint: Ele insere dados sobre o filme
     app.post('/v1/lanchonete/produto', cors(), bodyParserJSON, async function(request, response){
 
@@ -669,14 +681,14 @@ const bodyParserJSON = bodyParser.json()
     })
 
 
-    // app.delete('/v1/lanchonete/pedidos/:id', cors(), async function(request, response, next){
-    //     let idI = request.params.id
+    app.delete('/v1/lanchonete/carrinho/:idProduto/:idCliente', cors(), async function(request, response, next){
+        let idI = request.params.id
 
-    //     let dados = await controllerPedidos.setExcluirPedido(idI)
+        let dados = await controllerPedidos.setExcluirPedido(idI)
 
-    //     response.status(dados.status_code)
-    //     response.json(dados)
-    // })
+        response.status(dados.status_code)
+        response.json(dados)
+    })
 
     //  app.put('/v1/lanchonete/pedidos/:idPedido/:id_c/:id_p', cors(), bodyParserJSON, async function(request, response){
     //     let contentType = request.headers['content-type']
